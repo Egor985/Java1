@@ -1,133 +1,39 @@
-package homework;
-
-import java.util.Arrays;
-
+package Lesson5.homework;
 
 public class homework {
+    private String fio;
+    private String post;
+    private String email;
+    private String tel;
+    private double salary;
+    private int age;
 
-    public static int[] mirror(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (arr[i] + 1) % 2;
-        }
-        return arr;
+    public homework(String fio, String post, String email, String tel, double salary, int age) {
+        this.fio = fio;
+        this.post = post;
+        this.email = email;
+        this.tel = tel;
+        this.salary = salary;
     }
 
-    public static int[] emptyArray(int lenth) {
-        int[] array = new int[lenth];
-        for (int i = 1; i < lenth; i++) {
-            array[i] = array[i - 1] + 3;
-        }
-        return array;
+    int GetAge() {return age; }
+
+    void ShowInfo() {
+        System.out.println(fio + " " + post + " " +  email + " " + tel + " " + salary + " " + age);
     }
-
-    public static int[] doubling(int[] array2) {
-        for (int i = 0; i < array2.length; i++) {
-            if (array2[i] < 6){
-                array2[i] = array2[i] * 2;
-            } else{
-                array2[i] = array2[i];
-            }
-        }
-        return array2;
-    }
-
-    //0 0 1 0 0
-    //0 1 1 1 0
-    //1 1 1 1 1
-    //0 1 1 1 0
-    //0 0 1 0 0
-    static void rhombus(int [][] matrix) {
-        for (int i = 1; i < matrix.length - 1; i++) {
-            for (int j = 1; j < matrix.length - 1; j++) {
-                matrix[i][j] = 1;
-            }
-        }
-        matrix[0][2] = 1;
-        matrix[4][2] = 1;
-        matrix[2][0] = 1;
-        matrix[2][4] = 1;
-    }
-
-    // Задать одномерный массив и найти в нем минимальный и максимальный элементы
-    public static int Min(int[] array) {
-        int min = array[0];
-        for(int i = 0; i < array.length; i++){
-            if (array[i] < min) min = array[i];
-        }
-        return min;
-    }
-    public static int Max(int[] array) {
-        int max = array[0];
-        for(int i = 0; i < array.length; i++){
-            if (array[i] > max) max = array[i];
-        }
-        return max;
-    }
-
-//сместить все элементы массива на n позиций
-    public static void shiftLR(int[] array, int shift) {
-        if (shift < 0) {
-            shift = -shift;
-            shift %= array.length;
-            shift = array.length - shift;
-        } else {
-            shift = shift % array.length;
-        }
-
-        while (shift > 0) {
-            int tmp = array[array.length - 1];
-            for (int i = array.length - 1; i >= 1; i--) {
-                array[i] = array[i - 1];
-            }
-            array[0] = tmp;
-            shift--;
-        }
-
-        if (shift > 0) {
-            shift = shift;
-            shift %= array.length;
-            shift = array.length + shift;
-        } else {
-            shift = shift % array.length;
-        }
-
-        while (shift > 0) {
-            int tmp = array[array.length + 1];
-            for (int i = array.length + 1; i >= 1; i--) {
-                array[i] = array[i + 1];
-            }
-            array[0] = tmp;
-            shift++;
-        }
-    }
-
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(mirror(new int []{1, 1, 0, 0, 1, 0, 1, 1, 0, 0})));
 
-        System.out.println(Arrays.toString(emptyArray(8)));
+        homework[] persArray = new homework[5];
+        persArray[0] = new Person("Нестеров Михаил Алексеевич", "Начальник по охране труда", "nest@mail.ru", "8923123-45-67", 48000, 36);
+        persArray[1] = new Person("Потапенко Андрей Борисович", "Инженер 1 кат", "PotaoAB@gmail.com", "81234567890", 37500, 28);
+        persArray[2] = new Person("Иванов Иван Иванович", "Сварщик 5 разряда", "Ivanov12@mail.ru", "89888888888", 29000, 51);
+        persArray[3] = new Person("Гафаров Дамир Гареевич", "Инженер по технике безопасности", "Gafarov24@gmail.com", "83832251845", 33000, 40);
+        persArray[4] = new Person("Михайленко Мария Алексеевна", "Бухгалтер", "buch1414@mail.ru", "89132466777", 51800, 47);
 
-        System.out.println(Arrays.toString(doubling(new int []{1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1})));
-
-        int [][] m = new int[5][5];
-        rhombus(m);
-        //System.out.println(Arrays.deepToString(m));  //[[1, 0, 1], [0, 1, 0], [1, 0, 1]]
-        for (int i = 0; i < 5; i++){
-            for (int j = 0; j < 5; j++){
-                System.out.print(m[i][j] + " ");
-            }
-            System.out.println();
+        for(homework item : persArray) {
+            if(item.GetAge() > 40) item.Show();
         }
-
-        System.out.print("Минимальное значение элементов массива: ");
-        System.out.println(Min(new int[]{-12, 16, 5, 0, -8, 11, 13, 1}));
-        System.out.print("Минимальное значение элементов массива: ");
-        System.out.println(Max(new int[]{-12, 16, 5, 0, -8, 11, 13, 1}));
-
-        int[] array = new int[]{1, 2, 3, 4, 5, 6};
-        shiftLR(array, 0);
-        System.out.println(Arrays.toString(array));
-
     }
-
 }
+
