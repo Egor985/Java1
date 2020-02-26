@@ -1,38 +1,29 @@
-package Lesson6.homework;
+package Lesson7.homework;
 
-public class Cat extends Animal{
-    private static String Name = "Мурзик";
+public class Cat extends Plate{
+    private static String name;
+    private static int appetitite;
+    private static boolean satiety;
 
-    @Override
-    public String toString() {
-        return Name;
+    public Cat(String name, int appetitite){
+        super(appetitite);
+        this.name = name;
+        this.appetitite = appetitite;
     }
 
-    public Cat() {
-        this.swimLimit = 0;
-        this.runLimit = 200;
-        this.jumpLimit = 2;
+    public String getName(){
+        return name;
     }
 
-    @Override
-        public void run(int length) {
-        if (length <= runLimit) {
-            System.out.println(this + " бежит " + length + " метра(ов)");
-        } else {
-            System.out.println(this + " не может пробежать столько");
-        }
-    }
-    @Override
-    public void swim(int length) {
-        System.out.println(this + " не умеет плавать");
+    public int getAppetitite(){
+        return appetitite;
     }
 
-    @Override
-    public void jump(int height) {
-        if (height <= jumpLimit) {
-            System.out.println(this + " прыгает на высоту " + height + " метра(ов)");
-        } else {
-            System.out.println(this + " не может запрыгнуть на эту высоту");
-        }
+    public void eat(Plate plate){
+        satiety = plate.decreaseFood(appetitite);
+    }
+
+    public void info(){
+        System.out.println(name + " " + (satiety? " сыт" : " голоден"));
     }
 }
